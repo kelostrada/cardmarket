@@ -1,18 +1,34 @@
 defmodule Cardmarket do
   @moduledoc """
-  Documentation for `Cardmarket`.
+  API for Cardmarket
   """
+  use Tesla
 
-  @doc """
-  Hello world.
+  plug(Tesla.Middleware.BaseUrl, "https://api.cardmarket.com/ws/v2.0/output.json")
+  plug(Cardmarket.Middleware.Authorization)
+  plug(Tesla.Middleware.JSON)
 
-  ## Examples
+  def account() do
+    get("/account")
+  end
 
-      iex> Cardmarket.hello()
-      :world
+  def games() do
+    get("/games")
+  end
 
-  """
-  def hello do
-    :world
+  def expansions(game_id) do
+    get("/games/#{game_id}/expansions")
+  end
+
+  def expansion_singles(expansion_id) do
+    get("/expansions/#{expansion_id}/singles")
+  end
+
+  def productlist() do
+    get("/productlist")
+  end
+
+  def priceguide(game_id) do
+    get("/priceguide", query: [idGame: game_id])
   end
 end

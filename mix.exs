@@ -24,6 +24,7 @@ defmodule Cardmarket.MixProject do
   defp deps do
     [
       {:tesla, "~> 1.3"},
+      {:uuid, "~> 1.0"},
       {:ex_doc, "~> 0.14", only: :dev, runtime: false}
     ]
   end
